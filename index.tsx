@@ -6,7 +6,7 @@ import App from "./src/App";
 function Root() {
   return (
     <StrictMode>
-        <App />
+      <App />
     </StrictMode>
   );
 }

@@ -28,4 +28,6 @@ export const colors = {
   text: "white",
   button: "#007AFF",
   buttonDark: "#464848",
+  highlight: "#1d634d",
+  placeHolderTextColor: "#999999",
 };

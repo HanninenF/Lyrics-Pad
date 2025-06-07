@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { colors, fontSize, spacing } from "../styles/globalStyles";
+import AppInput from "../components/ui/AppInput";
 
 export default function HomeScreen() {
   return (
@@ -14,6 +15,8 @@ export default function HomeScreen() {
       >
         Welcome to the Home Screen
       </Text>
+      <AppInput placeHolder="write here" label="write lyrics" />
+      <AppInput placeHolder="write here" label="crite composer" />
     </View>
   );
 }
