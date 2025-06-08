@@ -8,8 +8,8 @@ import { colors, fontSize, spacing } from "../../styles/globalStyles";
 import AppText from "./AppText";
 
 type Props = {
-  placeHolder: string,
-  label: string,
+  placeHolder?: string,
+  label?: string,
 };
 
 export default function AppInput({ placeHolder, label }: Props) {

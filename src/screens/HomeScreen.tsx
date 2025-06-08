@@ -1,22 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { colors, fontSize, spacing } from "../styles/globalStyles";
 import AppInput from "../components/ui/AppInput";
+import LyricsInput from "../components/LyricsInput";
+import AppText from "../components/ui/AppText";
 
 export default function HomeScreen() {
+  const [lyrics, setLyrics] = useState("");
   return (
     <View style={styles.container}>
-      <Text
+      <AppText
         style={{
-          marginTop: spacing.great,
           fontSize: fontSize.Xxl,
           color: colors.text,
         }}
       >
         Welcome to the Home Screen
-      </Text>
+      </AppText>
       <AppInput placeHolder="write here" label="write lyrics" />
       <AppInput placeHolder="write here" label="crite composer" />
+      <LyricsInput
+        onChangeText={setLyrics}
+        value={lyrics}
+        placeHolder="write here"
+        label="jojo"
+      />
     </View>
   );
 }
