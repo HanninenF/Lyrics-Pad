@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { colors, fontSize, spacing } from "../styles/globalStyles";
+import { StyleSheet, SafeAreaView } from "react-native";
+import { colors, fontSize } from "../styles/globalStyles";
 import AppInput from "../components/ui/AppInput";
 import LyricsInput from "../components/LyricsInput";
 import AppText from "../components/ui/AppText";
@@ -8,7 +8,7 @@ import AppText from "../components/ui/AppText";
 export default function HomeScreen() {
   const [lyrics, setLyrics] = useState("");
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <AppText
         style={{
           fontSize: fontSize.Xxl,
@@ -25,12 +25,13 @@ export default function HomeScreen() {
         placeHolder="write here"
         label="jojo"
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: colors.background,
     flex: 1,
     alignItems: "center",
   },
