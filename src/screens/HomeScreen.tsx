@@ -6,7 +6,6 @@ import LyricsInput from "../components/LyricsInput";
 import AppText from "../components/ui/AppText";
 
 export default function HomeScreen() {
-  const [inputValue, setInputValue] = useState("");
   return (
     <SafeAreaView style={styles.container}>
       <AppText
@@ -17,14 +16,6 @@ export default function HomeScreen() {
       >
         Welcome to the Home Screen
       </AppText>
-      <AppInput placeHolder="write here" label="write lyrics" />
-      <AppInput placeHolder="write here" label="crite composer" />
-      <LyricsInput
-        onChangeText={setInputValue}
-        value={inputValue}
-        placeHolder="write here"
-        label="jojo"
-      />
     </SafeAreaView>
   );
 }
