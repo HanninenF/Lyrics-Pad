@@ -1,11 +1,15 @@
-import React, { useState } from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import React from "react";
+import { StyleSheet, SafeAreaView, Button } from "react-native";
 import { colors, fontSize } from "../styles/globalStyles";
-import AppInput from "../components/ui/AppInput";
-import LyricsInput from "../components/LyricsInput";
 import AppText from "../components/ui/AppText";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../types/types";
+import { useNavigation } from "@react-navigation/native";
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, "NewLyric">;
 
 export default function HomeScreen() {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <SafeAreaView style={styles.container}>
       <AppText
@@ -16,6 +20,10 @@ export default function HomeScreen() {
       >
         Welcome to the Home Screen
       </AppText>
+      <Button
+        title="Skapa ny text"
+        onPress={() => navigation.navigate("NewLyric")}
+      />
     </SafeAreaView>
   );
 }

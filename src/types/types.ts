@@ -15,3 +15,9 @@ export type Musician = {
   useName: string;
   songs: LyricType[];
 };
+
+export type RootStackParamList = {
+  Home: undefined;
+  NewLyric: undefined;
+  Editor: undefined;
+};

@@ -1,15 +1,19 @@
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, SafeAreaView, Button } from "react-native";
 import AppInput from "../components/ui/AppInput";
 import LyricsInput from "../components/LyricsInput";
 import { useState } from "react";
-import { Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../types/types";
+import { colors } from "../styles/globalStyles";
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, "NewLyric">;
 
 export default function NewLyricScreen() {
   const [inputValue, setInputValue] = useState("");
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <AppInput placeHolder="write here" label="write lyrics" />
       <AppInput placeHolder="write here" label="crite composer" />
       <LyricsInput
@@ -19,9 +23,17 @@ export default function NewLyricScreen() {
         label="jojo"
       />
       <Button
-        title="Skapa ny text"
-        onPress={() => navigation.navigate("NewLyric")}
+        title="edit ny text"
+        onPress={() => navigation.navigate("Editor")}
       />
+      <Button title="Home" onPress={() => navigation.navigate("Home")} />
     </SafeAreaView>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.background,
+    flex: 1,
+    alignItems: "center",
+  },
+});
