@@ -10,8 +10,8 @@ export default function AppNavigator() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Home" component={NewLyricScreen} />
-        <Stack.Screen name="Home" component={EditorScreen} />
+        <Stack.Screen name="NewLyric" component={NewLyricScreen} />
+        <Stack.Screen name="Editor" component={EditorScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
