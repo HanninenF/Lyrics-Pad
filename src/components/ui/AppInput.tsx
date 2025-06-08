@@ -10,14 +10,16 @@ import AppText from "./AppText";
 type Props = {
   placeHolder?: string,
   label?: string,
+  value: string | undefined,
 };
 
-export default function AppInput({ placeHolder, label }: Props) {
+export default function AppInput({ placeHolder, label, value }: Props) {
   return (
     <KeyboardAvoidingView>
       <View style={styles.container}>
         <AppText style={styles.label}>{label}</AppText>
         <TextInput
+          value={value}
           placeholderTextColor={colors.placeHolderTextColor}
           placeholder={placeHolder}
           style={styles.input}

@@ -1,9 +1,10 @@
-import { StyleSheet, SafeAreaView, Button } from "react-native";
+import { StyleSheet, SafeAreaView, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types/types";
 import { colors } from "../styles/globalStyles";
 import LyricsForm from "../components/LyricsForm";
+import AppPressable from "../components/ui/AppPressable";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "NewLyric">;
 
@@ -12,11 +13,12 @@ export default function NewLyricScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <LyricsForm />
-      <Button
-        title="edit ny text"
-        onPress={() => navigation.navigate("Editor")}
-      />
-      <Button title="Home" onPress={() => navigation.navigate("Home")} />
+      <AppPressable onPress={() => navigation.navigate("Editor")}>
+        <Text>Edit</Text>
+      </AppPressable>
+      <AppPressable onPress={() => navigation.navigate("Home")}>
+        <Text>Home</Text>
+      </AppPressable>
     </SafeAreaView>
   );
 }

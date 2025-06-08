@@ -2,17 +2,17 @@ export type LyricType = {
   id: string;
   title: string;
   composers: {
-    music: Musician;
-    lyrics: Musician;
+    music: MusicianType[];
+    lyrics: MusicianType[];
   };
   content: string;
   createdAt: number;
-  tags: string[];
+  tags?: string[];
 };
 
-export type Musician = {
+export type MusicianType = {
   id: string;
-  useName: string;
+  userName: string;
   songs: LyricType[];
 };
 
