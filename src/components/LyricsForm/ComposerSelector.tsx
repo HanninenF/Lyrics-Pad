@@ -3,8 +3,8 @@ import Dropdown from "../ui/Dropdown";
 import AppPressable from "../ui/AppPressable";
 import useLyricsContext from "../../hooks/useLyricsContext";
 import { MusicianType } from "../../types/types";
-import useLyricsForm from "../../hooks/useLyricsForm";
 import { colors } from "../../styles/globalStyles";
+import { useLyricsForm } from "../../hooks/useLyricsForm";
 
 type Props = {
   role: "music" | "lyrics";
@@ -19,8 +19,8 @@ export default function ComposerSelector({
   setSelectedComposer,
   selectedComposer,
 }: Props) {
-  const { musicians, setLyrics, setMusicians } = useLyricsContext();
-  const { formValues, dispatch } = useLyricsForm({ setLyrics, setMusicians });
+  const { musicians } = useLyricsContext();
+  const { formValues, dispatch } = useLyricsForm();
 
   const handleAddComposer = () => {
     if (selectedComposer) {

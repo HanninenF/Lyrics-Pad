@@ -1,10 +1,9 @@
-import { FormValues, MusicianType } from "../types/types";
-
-type FormAction =
-  | { type: "SET_TITLE"; payload: string }
-  | { type: "SET_CONTENT"; payload: string }
-  | { type: "ADD_COMPOSER"; role: "music" | "lyrics"; payload: MusicianType }
-  | { type: "REMOVE_COMPOSER"; role: "music" | "lyrics"; id: string };
+import { FormAction, FormValues, MusicianType } from "../types/types";
+export const initialState: FormValues = {
+  title: "",
+  content: "",
+  composers: { music: [], lyrics: [] },
+};
 
 export default function formReducer(
   state: FormValues,

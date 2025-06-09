@@ -23,3 +23,9 @@ export type RootStackParamList = {
   NewLyric: undefined;
   Editor: undefined;
 };
+
+export type FormAction =
+  | { type: "SET_TITLE"; payload: string }
+  | { type: "SET_CONTENT"; payload: string }
+  | { type: "ADD_COMPOSER"; role: "music" | "lyrics"; payload: MusicianType }
+  | { type: "REMOVE_COMPOSER"; role: "music" | "lyrics"; id: string };

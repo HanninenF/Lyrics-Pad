@@ -5,6 +5,7 @@ import { RootStackParamList } from "../types/types";
 import { colors } from "../styles/globalStyles";
 import LyricsForm from "../components/LyricsForm/LyricsForm";
 import AppPressable from "../components/ui/AppPressable";
+import { LyricsFormProvider } from "../contexts/LyricsFormContext";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "NewLyric">;
 
@@ -12,7 +13,10 @@ export default function NewLyricScreen() {
   const navigation = useNavigation<NavigationProp>();
   return (
     <SafeAreaView style={styles.container}>
-      <LyricsForm />
+      <LyricsFormProvider>
+        <LyricsForm />
+      </LyricsFormProvider>
+
       <AppPressable onPress={() => navigation.navigate("Editor")}>
         <Text>Edit</Text>
       </AppPressable>
