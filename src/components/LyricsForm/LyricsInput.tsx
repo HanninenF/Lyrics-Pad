@@ -1,6 +1,6 @@
 import { TextInput, StyleSheet, View } from "react-native";
 import { colors, fontSize, spacing } from "../../styles/globalStyles";
-import AppText from "./AppText";
+import AppText from "../ui/AppText";
 
 type Props = {
   placeHolder?: string;

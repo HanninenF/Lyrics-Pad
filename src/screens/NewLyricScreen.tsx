@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types/types";
 import { colors } from "../styles/globalStyles";
-import LyricsForm from "../components/LyricsForm";
+import LyricsForm from "../components/LyricsForm/LyricsForm";
 import AppPressable from "../components/ui/AppPressable";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "NewLyric">;

@@ -23,29 +23,6 @@ export default function useLyricsForm({ setLyrics, setMusicians }: Props) {
     dispatch({ type: "SET_CONTENT", payload: text });
   };
 
-  const handleAddComposer = (
-    role: "music" | "lyrics",
-    selected: MusicianType | null,
-    clear: () => void
-  ) => {
-    if (selected) {
-      dispatch({
-        type: "ADD_COMPOSER",
-        role,
-        payload: selected,
-      });
-      clear(); // Töm vald dropdown
-    }
-  };
-
-  const handleRemoveComposer = (role: "music" | "lyrics", id: string) => {
-    dispatch({
-      type: "REMOVE_COMPOSER",
-      role,
-      id,
-    });
-  };
-
   const handleSave = () => {
     const { title, content, composers } = formValues;
 
@@ -91,10 +68,9 @@ export default function useLyricsForm({ setLyrics, setMusicians }: Props) {
 
   return {
     formValues,
+    dispatch,
     handleSetTitle,
     handleSetContent,
-    handleAddComposer,
-    handleRemoveComposer,
     handleSave,
   };
 }
