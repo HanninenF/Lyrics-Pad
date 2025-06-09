@@ -8,94 +8,24 @@ import { FormValues, LyricType, MusicianType } from "../types/types";
 import Dropdown from "./ui/Dropdown";
 import { colors } from "../styles/globalStyles";
 import formReducer from "../reducers/lyricsFormReducer";
+import useLyricsForm from "../hooks/useLyricsForm";
+import { LyricsContext } from "../contexts/LyricsContext";
 
 export default function LyricsForm() {
-  const { lyrics, setLyrics, musicians, setMusicians } = useLyricsContext();
+  const { setLyrics, setMusicians, musicians } = useLyricsContext();
+  const {
+    formValues,
+    handleSetTitle,
+    handleSetContent,
+    handleAddComposer,
+    handleRemoveComposer,
+    handleSave,
+  } = useLyricsForm({ setLyrics, setMusicians });
   const [selectedMusicComposer, setSelectedMusicComposer] =
     useState<MusicianType | null>(null);
   const [selectedLyricist, setSelectedLyricist] = useState<MusicianType | null>(
     null
   );
-
-  const [formValues, dispatch] = useReducer(formReducer, {
-    title: "",
-    composers: { music: [], lyrics: [] },
-    content: "",
-  });
-
-  const handleSetTitle = (text: string) => {
-    dispatch({ type: "SET_TITLE", payload: text });
-  };
-
-  const handleSetContent = (text: string) => {
-    dispatch({ type: "SET_CONTENT", payload: text });
-  };
-
-  const handleAddComposer = (
-    role: "music" | "lyrics",
-    selected: MusicianType | null,
-    clear: () => void
-  ) => {
-    if (selected) {
-      dispatch({
-        type: "ADD_COMPOSER",
-        role,
-        payload: selected,
-      });
-      clear(); // Töm vald dropdown
-    }
-  };
-
-  const handleRemoveComposer = (role: "music" | "lyrics", id: string) => {
-    dispatch({
-      type: "REMOVE_COMPOSER",
-      role,
-      id,
-    });
-  };
-
-  const handleSave = () => {
-    const { title, content, composers } = formValues;
-
-    // Validera att minst en musiker valts i varje fält
-    if (
-      !title ||
-      !content ||
-      composers.music.length === 0 ||
-      composers.lyrics.length === 0
-    ) {
-      alert(
-        "Please fill in all fields and select at least one composer for music and lyrics."
-      );
-      return;
-    }
-
-    const newLyric: LyricType = {
-      ...formValues,
-      id: Date.now().toString(),
-      createdAt: Date.now(),
-    };
-
-    // Lägg till låten i lyrics
-    setLyrics((prev) => [...prev, newLyric]);
-
-    // Lägg till låten till alla valda musiker
-    setMusicians((prev) =>
-      prev.map((musician) => {
-        const isInMusic = composers.music.some((m) => m.id === musician.id);
-        const isInLyrics = composers.lyrics.some((l) => l.id === musician.id);
-
-        if (isInMusic || isInLyrics) {
-          return {
-            ...musician,
-            songs: [...musician.songs, newLyric],
-          };
-        }
-
-        return musician;
-      })
-    );
-  };
 
   return (
     <ScrollView>
