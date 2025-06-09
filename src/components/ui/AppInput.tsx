@@ -8,12 +8,18 @@ import { colors, fontSize, spacing } from "../../styles/globalStyles";
 import AppText from "./AppText";
 
 type Props = {
-  placeHolder?: string,
-  label?: string,
-  value: string | undefined,
+  onChangeText: (text: string) => void;
+  placeHolder?: string;
+  label?: string;
+  value: string | undefined;
 };
 
-export default function AppInput({ placeHolder, label, value }: Props) {
+export default function AppInput({
+  onChangeText,
+  placeHolder,
+  label,
+  value,
+}: Props) {
   return (
     <KeyboardAvoidingView>
       <View style={styles.container}>
@@ -23,6 +29,7 @@ export default function AppInput({ placeHolder, label, value }: Props) {
           placeholderTextColor={colors.placeHolderTextColor}
           placeholder={placeHolder}
           style={styles.input}
+          onChangeText={onChangeText}
         />
       </View>
     </KeyboardAvoidingView>
