@@ -1,17 +1,25 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, Button } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Button,
+  Platform,
+  StatusBar,
+} from "react-native";
 import { colors, fontSize } from "../styles/globalStyles";
 import AppText from "../components/ui/AppText";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types/types";
 import { useNavigation } from "@react-navigation/native";
+import AppPressable from "../components/ui/AppPressable";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "NewLyric">;
 
 export default function HomeScreen() {
   const navigation = useNavigation<NavigationProp>();
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.safeArea}>
       <AppText
         style={{
           fontSize: fontSize.Xxl,
@@ -20,18 +28,18 @@ export default function HomeScreen() {
       >
         Welcome to the Home Screen
       </AppText>
-      <Button
-        title="Skapa ny text"
-        onPress={() => navigation.navigate("NewLyric")}
-      />
+      <AppPressable onPress={() => navigation.navigate("NewLyric")}>
+        <Text>Enter Text Here</Text>
+      </AppPressable>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.background,
+  safeArea: {
     flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     alignItems: "center",
+    backgroundColor: colors.background,
   },
 });

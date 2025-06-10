@@ -1,4 +1,10 @@
-import { StyleSheet, SafeAreaView, Text } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  Text,
+  Platform,
+  StatusBar,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types/types";
@@ -12,7 +18,7 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList, "NewLyric">;
 export default function NewLyricScreen() {
   const navigation = useNavigation<NavigationProp>();
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.safeArea}>
       <LyricsFormProvider>
         <LyricsForm />
       </LyricsFormProvider>
@@ -27,9 +33,10 @@ export default function NewLyricScreen() {
   );
 }
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.background,
+  safeArea: {
     flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     alignItems: "center",
+    backgroundColor: colors.background,
   },
 });
