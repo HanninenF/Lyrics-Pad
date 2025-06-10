@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontSize: fontSize.medium,
     alignContent: "flex-end",
-    height: "100%",
     paddingLeft: spacing.small,
     marginTop: spacing.small,
   },
@@ -59,6 +58,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.small,
     backgroundColor: colors.highlight,
     borderRadius: 5,
-    minWidth: 200,
+    minWidth: 10,
+    maxWidth: 100,
   },
 });

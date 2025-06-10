@@ -1,6 +1,7 @@
 import DropDownPicker from "react-native-dropdown-picker";
 import React, { useEffect, useState } from "react";
 import { MusicianType } from "../../types/types";
+import { StyleSheet } from "react-native";
 
 type Props = {
   items: MusicianType[];
@@ -37,6 +38,8 @@ export default function Dropdown({
 
   return (
     <DropDownPicker
+      containerStyle={{ width: 250 }}
+      style={styles.container}
       open={open}
       value={dropdownValue}
       items={dropdownItems}
@@ -48,3 +51,8 @@ export default function Dropdown({
     />
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    maxWidth: 250,
+  },
+});

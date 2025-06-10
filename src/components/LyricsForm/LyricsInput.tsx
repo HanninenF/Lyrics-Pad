@@ -1,6 +1,7 @@
 import { TextInput, StyleSheet, View } from "react-native";
 import { colors, fontSize, spacing } from "../../styles/globalStyles";
 import AppText from "../ui/AppText";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 type Props = {
   placeHolder?: string;
@@ -34,6 +35,7 @@ export default function LyricsInput({
 const styles = StyleSheet.create({
   container: {
     marginVertical: spacing.small,
+    alignItems: "center",
   },
   label: {
     color: colors.text,
@@ -41,13 +43,12 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xs,
   },
   textArea: {
-    height: 150, // Du kan justera höjden
-    borderWidth: 1,
-    borderColor: colors.buttonDark,
+    width: 600,
+    height: 280, // Du kan justera höjden
     backgroundColor: colors.highlight,
     color: colors.text,
-    padding: spacing.small,
-    fontSize: fontSize.medium,
+    padding: spacing.medium,
+    fontSize: fontSize.large,
     borderRadius: 6, // Rundade hörn för en mjukare känsla
   },
 });

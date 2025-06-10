@@ -1,4 +1,5 @@
 import {
+  View,
   StyleSheet,
   SafeAreaView,
   Text,
@@ -23,12 +24,14 @@ export default function NewLyricScreen() {
         <LyricsForm />
       </LyricsFormProvider>
 
-      <AppPressable onPress={() => navigation.navigate("Editor")}>
-        <Text>Edit</Text>
-      </AppPressable>
-      <AppPressable onPress={() => navigation.navigate("Home")}>
-        <Text>Home</Text>
-      </AppPressable>
+      <View style={styles.nabvButtonWrapper}>
+        <AppPressable onPress={() => navigation.navigate("Editor")}>
+          <Text>Edit</Text>
+        </AppPressable>
+        <AppPressable onPress={() => navigation.navigate("Home")}>
+          <Text>Home</Text>
+        </AppPressable>
+      </View>
     </SafeAreaView>
   );
 }
@@ -38,5 +41,8 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     alignItems: "center",
     backgroundColor: colors.background,
+  },
+  nabvButtonWrapper: {
+    flexDirection: "row",
   },
 });

@@ -33,21 +33,8 @@ export default function ComposerSelector({
     }
   };
 
-  const handleRemoveComposer = (id: string) => {
-    dispatch({
-      type: "REMOVE_COMPOSER",
-      role,
-      id,
-    });
-  };
-
   return (
-    <View
-      style={[
-        styles.selectComposerCon,
-        role === "music" ? styles.z1000 : styles.z900,
-      ]}
-    >
+    <View style={styles.selectComposerCon}>
       <Dropdown
         items={musicians}
         placeholder={`Select ${role} composer`}
@@ -57,40 +44,12 @@ export default function ComposerSelector({
       <AppPressable onPress={handleAddComposer}>
         <Text>Add</Text>
       </AppPressable>
-      {formValues.composers[role].length > 0 && (
-        <View style={styles.addedList}>
-          <Text style={styles.addedText}>Added {role} composers:</Text>
-          {formValues.composers[role].map((m) => (
-            <View key={m.id} style={styles.addedItem}>
-              <Text style={styles.addedText}>{m.userName}</Text>
-              <AppPressable onPress={() => handleRemoveComposer(m.id)}>
-                <Text style={styles.removeText}>Remove</Text>
-              </AppPressable>
-            </View>
-          ))}
-        </View>
-      )}
     </View>
   );
 }
 const styles = StyleSheet.create({
   selectComposerCon: {
     marginBottom: 20,
-  },
-  z1000: { zIndex: 1000 },
-  z900: { zIndex: 900 },
-  addedList: {
-    marginTop: 10,
-    paddingLeft: 10,
-  },
-  addedItem: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 5,
-  },
-  addedText: { color: colors.text },
-  removeText: {
-    color: "red",
   },
 });
