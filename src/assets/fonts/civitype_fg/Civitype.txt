@@ -1,0 +1,33 @@
+Civitype FG
+===========
+The font Civitype shipped with Fontographer 4.1. As far as I know it is based on a script font named "Civilité".
+The font database file says:
+
+"Developed by S. G. Moye 1991. Public Domain."
+
+So I had no scruples developing my own version (1.55) in 2002. Many of the alternative characters in this font went to places where they are accessible under Windows. The German double s was created new, the s with flourish went to }. The d was problematic when proceeded by an l, like in wild, build, folder etc. I adjusted it and placed the original on Ú. There is another alternative d on the backslash. Use a character map to find what you need. Mind the ch and ck ligatures on Ì and Í. I added just lowercase international characters mostly since you won't use such a font all-caps anyway. More extended characters were added in 2013 for version 1.60.
+
+Use
+---
+My version is freeware for commercial and non-commercial purposes, but unlike the original it is not in the public domain. Use it for any purpose and at your own risk.
+
+Conversion and modification
+---------------------------
+You may convert this font to other formats including web font formats or modify it for your own purposes. You may use web font formats of this font to display text on your web pages, but you may not explicitly offer converted or modified versions of this font software for download or re-use by others, unless you have received permission in writing to do so.
+
+Distribution
+------------
+You may distribute this font on digital media or as a download on your website as long as you comply with the following rules. Violation of one or more of these rules terminates your distribution license and you have to stop distribution immediately:
+
+1. You may offer the font only in form of a ZIP file containing only the font software and this readme file. 
+2. You are not allowed to distribute the font software without this text file.
+3. You may not redistribute modified or converted copies of the font software (see above).
+4. You may not add advertising messages in text or graphics form to the zip file.
+5. You are not allowed to create a self-extracting executable file containing the font software or require the user 6. to run or install a download manager or other software to get the download.
+7. You may not charge money for the download. 
+8. If you want to distribute this font on storage media (CD DVD) produced in numbers of more than 50 identical copies, you must send me a specimen copy.
+
+
+April 2013
+Andreas Höfeld
+Fontgrube.de
