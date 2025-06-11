@@ -8,6 +8,5 @@ const styles = StyleSheet.create({
   text: {
     color: colors.text,
     fontSize: spacing.large,
-    marginBottom: spacing.small,
   },
 });

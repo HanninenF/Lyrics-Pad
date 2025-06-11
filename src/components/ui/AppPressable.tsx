@@ -34,8 +34,6 @@ export default function AppPressable({ children, style, ...rest }: Props) {
 
 const styles = StyleSheet.create({
   pressable: {
-    maxWidth: 200,
-    marginTop: spacing.large,
     margin: spacing.small,
     backgroundColor: colors.button,
     paddingVertical: spacing.medium,
