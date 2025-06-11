@@ -13,6 +13,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types/types";
 import { useNavigation } from "@react-navigation/native";
 import AppPressable from "../components/ui/AppPressable";
+import LyricsCard from "../components/LyricsCard";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "NewLyric">;
 
@@ -28,9 +29,11 @@ export default function HomeScreen() {
       >
         Welcome to the Home Screen
       </AppText>
+
       <AppPressable onPress={() => navigation.navigate("NewLyric")}>
-        <Text>Enter Text Here</Text>
+        <AppText>+</AppText>
       </AppPressable>
+      <LyricsCard />
     </SafeAreaView>
   );
 }
