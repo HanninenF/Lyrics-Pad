@@ -29,3 +29,5 @@ export type FormAction =
   | { type: "SET_CONTENT"; payload: string }
   | { type: "ADD_COMPOSER"; role: "music" | "lyrics"; payload: MusicianType }
   | { type: "REMOVE_COMPOSER"; role: "music" | "lyrics"; id: string };
+
+export type Role = "music" | "lyrics";

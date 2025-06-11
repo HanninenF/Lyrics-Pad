@@ -2,6 +2,8 @@ import { TextInput, StyleSheet, View } from "react-native";
 import { colors, fontSize, spacing } from "../../styles/globalStyles";
 import AppText from "../ui/AppText";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import ComposerListItem from "./ComposerListItem";
+import ComposerDisplay from "./ComposerDisplay";
 
 type Props = {
   placeHolder?: string;
@@ -19,6 +21,7 @@ export default function LyricsInput({
   return (
     <View style={styles.container}>
       <AppText style={styles.label}>{label}</AppText>
+      <ComposerDisplay roles={["music", "lyrics"]} />
       <TextInput
         multiline={true}
         placeholder={placeHolder}
@@ -35,7 +38,7 @@ export default function LyricsInput({
 const styles = StyleSheet.create({
   container: {
     marginVertical: spacing.small,
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   label: {
     color: colors.text,

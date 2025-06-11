@@ -2,6 +2,8 @@ import { View, StyleSheet, Text } from "react-native";
 import { useLyricsForm } from "../../hooks/useLyricsForm";
 import AppPressable from "../ui/AppPressable";
 import { colors } from "../../styles/globalStyles";
+import AppText from "../ui/AppText";
+import { Role } from "../../types/types";
 
 type Props = {
   role: "music" | "lyrics";
@@ -16,6 +18,8 @@ export default function ComposerListItem({ role }: Props) {
       id,
     });
   };
+
+  const roles: (keyof typeof formValues.composers)[] = ["music", "lyrics"];
   return (
     <View
       style={[
@@ -36,6 +40,7 @@ export default function ComposerListItem({ role }: Props) {
           ))}
         </View>
       )}
+      {/* TODO:Modulera ut denna del och använd role och gör den generisk för music och lyrics */}
     </View>
   );
 }
