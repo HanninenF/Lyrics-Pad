@@ -21,7 +21,7 @@ export type FormValues = Omit<LyricType, "id" | "createdAt">;
 export type RootStackParamList = {
   Home: undefined;
   NewLyric: undefined;
-  Editor: undefined;
+  Editor: { lyricsId: string };
 };
 
 export type FormAction =

@@ -1,34 +1,43 @@
 import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import AppText from "./ui/AppText";
-import { fontSize, spacing } from "../styles/globalStyles";
+import { colors, fontSize, spacing } from "../styles/globalStyles";
 import { useFonts } from "expo-font";
 import AppPressable from "./ui/AppPressable";
+import useLyricsContext from "../hooks/useLyricsContext";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../types/types";
 
 type Props = {
   lyricsId: string;
 };
 
-export default function LyricsCard({ lyricsId: id }: Props) {
-  const [fontsLoaded] = useFonts({
-    stigmaPoster: require("../assets/fonts/stigma_poster/StigmaPoster.ttf"),
-    brunson: require("../assets/fonts/brunson/Brunson.ttf"),
-    civitype: require("../assets/fonts/civitype_fg/civitype.ttf"),
-    polaroid: require("../assets/fonts/polaroid_script/Polaroid.otf"),
-    swomun: require("../assets/fonts/swomun_serif/Swomun.otf"),
-  });
+export default function LyricsCard({ lyricsId }: Props) {
+  const { lyrics } = useLyricsContext();
+  type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Editor">;
+  const navigation = useNavigation<NavigationProp>();
 
-  if (!fontsLoaded) {
-    return <ActivityIndicator size="large" />;
-  }
+  const lyric = lyrics.find((l) => lyricsId === l.id);
+  if (!lyric) throw new Error("no lyric was found");
 
   return (
-    <AppPressable key={id} style={styles.container}>
-      <AppText style={styles.header}>At the Mighty Halls They'll Walk</AppText>
+    <AppPressable
+      key={lyric.id}
+      style={styles.container}
+      onPress={() => navigation.navigate("Editor", { lyricsId })}
+    >
+      <AppText style={styles.header}>{lyric.title}</AppText>
       <AppText style={styles.roles}>
-        Music: <Text style={{ fontStyle: "italic" }}>hårdkodat</Text>
+        {"Music: "}
+        <Text style={styles.name}>
+          {lyric.composers.music.map((l) => l.userName)}
+        </Text>
       </AppText>
       <AppText style={styles.roles}>
-        Lyrics: <Text style={{ fontStyle: "italic" }}>hårdkodat</Text>
+        {"Lyrics: "}
+        <Text style={styles.name}>
+          {lyric.composers.lyrics.map((l) => l.userName)}
+        </Text>
       </AppText>
     </AppPressable>
   );
@@ -38,7 +47,7 @@ const styles = StyleSheet.create({
     margin: 0,
     alignItems: "flex-start",
     width: 300,
-    backgroundColor: "blue",
+    backgroundColor: colors.highlight,
     borderWidth: 1,
     borderColor: "white",
     borderRadius: spacing.xs,
@@ -50,5 +59,13 @@ const styles = StyleSheet.create({
     fontSize: fontSize.large,
     letterSpacing: 1.1,
   },
-  roles: { paddingLeft: spacing.large },
+  roles: {
+    paddingLeft: spacing.large,
+  },
+  name: {
+    fontStyle: "italic",
+    fontFamily: "civitype",
+    letterSpacing: 2,
+    fontSize: 25,
+  },
 });

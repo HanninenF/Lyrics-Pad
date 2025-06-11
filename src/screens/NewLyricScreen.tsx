@@ -25,9 +25,9 @@ export default function NewLyricScreen() {
       </LyricsFormProvider>
 
       <View style={styles.nabvButtonWrapper}>
-        <AppPressable onPress={() => navigation.navigate("Editor")}>
+        {/*  <AppPressable onPress={() => navigation.navigate("Editor")}>
           <Text>Edit</Text>
-        </AppPressable>
+        </AppPressable> */}
         <AppPressable onPress={() => navigation.navigate("Home")}>
           <Text>Home</Text>
         </AppPressable>

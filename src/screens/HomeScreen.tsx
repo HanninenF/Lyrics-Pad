@@ -16,7 +16,7 @@ import AppPressable from "../components/ui/AppPressable";
 import LyricsCard from "../components/LyricsCard";
 import LyricsList from "../components/LyricsList";
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, "NewLyric">;
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Home">;
 
 export default function HomeScreen() {
   const navigation = useNavigation<NavigationProp>();
