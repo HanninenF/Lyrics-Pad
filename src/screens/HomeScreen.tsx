@@ -13,8 +13,8 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types/types";
 import { useNavigation } from "@react-navigation/native";
 import AppPressable from "../components/ui/AppPressable";
-import LyricsCard from "../components/LyricsCard";
-import LyricsList from "../components/LyricsList";
+import LyricsCard from "../components/LyricsList/LyricsCard";
+import LyricsList from "../components/LyricsList/LyricsList";
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Home">;
 

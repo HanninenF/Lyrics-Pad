@@ -1,12 +1,13 @@
 import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
-import AppText from "./ui/AppText";
-import { colors, fontSize, spacing } from "../styles/globalStyles";
+import AppText from "../ui/AppText";
+import { colors, fontSize, spacing } from "../../styles/globalStyles";
 import { useFonts } from "expo-font";
-import AppPressable from "./ui/AppPressable";
-import useLyricsContext from "../hooks/useLyricsContext";
+import AppPressable from "../ui/AppPressable";
+import useLyricsContext from "../../hooks/useLyricsContext";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../types/types";
+import { MusicianType, RootStackParamList } from "../../types/types";
+import RenderNamesWithSeparator from "../ui/RenderNamesWithSeparator";
 
 type Props = {
   lyricsId: string;
@@ -29,15 +30,19 @@ export default function LyricsCard({ lyricsId }: Props) {
       <AppText style={styles.header}>{lyric.title}</AppText>
       <AppText style={styles.roles}>
         {"Music: "}
-        <Text style={styles.name}>
-          {lyric.composers.music.map((l) => l.userName)}
-        </Text>
+        <RenderNamesWithSeparator
+          user={lyric.composers.music}
+          separator="/"
+          style={styles.name}
+        />
       </AppText>
       <AppText style={styles.roles}>
         {"Lyrics: "}
-        <Text style={styles.name}>
-          {lyric.composers.lyrics.map((l) => l.userName)}
-        </Text>
+        <RenderNamesWithSeparator
+          user={lyric.composers.lyrics}
+          separator="/"
+          style={styles.name}
+        />
       </AppText>
     </AppPressable>
   );

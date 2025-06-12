@@ -1,10 +1,11 @@
 //Bygg vy med FlatList + komponent för lyric-kort + navigering till redigeringsvy vid tryck.
 
 import { useState } from "react";
-import useLyricsContext from "../hooks/useLyricsContext";
+import useLyricsContext from "../../hooks/useLyricsContext";
 import LyricsCard from "./LyricsCard";
-import AppPressable from "./ui/AppPressable";
-import AppText from "./ui/AppText";
+import AppPressable from "../ui/AppPressable";
+import AppText from "../ui/AppText";
+import { FlatList } from "react-native-gesture-handler";
 
 /*
 🧱 Feature 4: Lista alla texter
@@ -21,11 +22,16 @@ export default function LyricsList() {
   return (
     <>
       <AppPressable onPress={() => setShowLyricsCards(!showLyricsCards)}>
-        <AppText>show</AppText>
+        <AppText>{!showLyricsCards ? "Show" : "Hide"}</AppText>
       </AppPressable>
 
-      {showLyricsCards &&
-        lyrics.map((l) => <LyricsCard key={l.id} lyricsId={l.id} />)}
+      {showLyricsCards && (
+        <FlatList
+          data={lyrics}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <LyricsCard lyricsId={item.id} />}
+        />
+      )}
     </>
   );
 }
