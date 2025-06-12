@@ -43,6 +43,7 @@ export default function SongMetaData() {
 }
 const styles = StyleSheet.create({
   container: {
+    zIndex: 1000,
     alignItems: "center",
     padding: 16,
   },

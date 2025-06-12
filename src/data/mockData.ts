@@ -6,6 +6,36 @@ export const musiciansData: MusicianType[] = [
     userName: "Throllv",
     songs: [],
   },
+  {
+    id: "2",
+    userName: "Hravn",
+    songs: [],
+  },
+  {
+    id: "3",
+    userName: "Diabolös",
+    songs: [],
+  },
+  {
+    id: "4",
+    userName: "Janne",
+    songs: [],
+  },
+  {
+    id: "5",
+    userName: "Faredo",
+    songs: [],
+  },
+  {
+    id: "6",
+    userName: "Jenny",
+    songs: [],
+  },
+  {
+    id: "7",
+    userName: "Sara",
+    songs: [],
+  },
 ];
 
 export const SongsData: LyricType[] = [

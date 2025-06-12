@@ -34,7 +34,12 @@ export default function ComposerSelector({
   };
 
   return (
-    <View style={styles.selectComposerCon}>
+    <View
+      style={[
+        styles.selectComposerCon,
+        role === "music" ? styles.z1000 : styles.z900,
+      ]}
+    >
       <Dropdown
         items={musicians}
         placeholder={`Select ${role} composer`}
@@ -52,4 +57,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     flexDirection: "row",
   },
+  z1000: { zIndex: 1000 },
+  z900: { zIndex: 900 },
 });

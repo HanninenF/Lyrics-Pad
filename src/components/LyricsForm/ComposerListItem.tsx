@@ -46,8 +46,8 @@ export default function ComposerListItem({ role }: Props) {
 }
 const styles = StyleSheet.create({
   selectComposerCon: {},
-  z1000: { zIndex: 1000 },
-  z900: { zIndex: 900 },
+  z1000: { zIndex: 900 },
+  z900: { zIndex: 800 },
   addedList: {
     marginTop: 10,
     paddingLeft: 10,

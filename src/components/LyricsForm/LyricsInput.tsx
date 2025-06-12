@@ -37,6 +37,7 @@ export default function LyricsInput({
 
 const styles = StyleSheet.create({
   container: {
+    zIndex: 2,
     marginVertical: spacing.small,
     alignItems: "flex-start",
   },

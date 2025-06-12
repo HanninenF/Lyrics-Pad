@@ -7,7 +7,7 @@ import useLyricsContext from "../../hooks/useLyricsContext";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { MusicianType, RootStackParamList } from "../../types/types";
-import RenderNamesWithSeparator from "../ui/RenderNamesWithSeparator";
+import RenderNamesWithSeparator from "./RenderNamesWithSeparator";
 
 type Props = {
   lyricsId: string;
