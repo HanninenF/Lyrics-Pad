@@ -37,7 +37,7 @@ export default function LyricsInput({
         style={styles.textArea}
         value={value}
         onChangeText={onChangeText}
-        textAlignVertical="top" // Viktigt för Android så texten börjar uppe i hörnet
+        textAlignVertical="top"
       />
     </View>
   );
