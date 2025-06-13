@@ -16,7 +16,7 @@ import { LyricsFormProvider } from "../contexts/LyricsFormContext";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  "LyricForm"
+  "LyricsFormScreen"
 >;
 
 export default function LyricsFormScreen() {

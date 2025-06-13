@@ -31,7 +31,7 @@ export default function HomeScreen() {
         Welcome to the Home Screen
       </AppText>
 
-      <AppPressable onPress={() => navigation.navigate("NewLyric")}>
+      <AppPressable onPress={() => navigation.navigate("LyricsFormScreen")}>
         <AppText>+</AppText>
       </AppPressable>
       <LyricsList />
