@@ -48,6 +48,7 @@ export default function Dropdown({
       setItems={setDropdownItems}
       placeholder={placeholder}
       onChangeValue={handleChange}
+      listMode="SCROLLVIEW"
     />
   );
 }

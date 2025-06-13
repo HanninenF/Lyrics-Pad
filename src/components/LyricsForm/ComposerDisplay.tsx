@@ -2,6 +2,7 @@ import { View, StyleSheet } from "react-native";
 import { useLyricsForm } from "../../hooks/useLyricsForm";
 import AppText from "../ui/AppText";
 import { colors } from "../../styles/globalStyles";
+import RenderNamesWithSeparator from "../LyricsList/RenderNamesWithSeparator";
 
 type Props = {
   roles: ("lyrics" | "music")[];
@@ -10,16 +11,25 @@ type Props = {
 export default function ComposerDisplay({ roles }: Props) {
   const { formValues } = useLyricsForm();
 
-  return roles.map((r) =>
-    formValues.composers[r]?.map((m) => (
-      <View key={`${r}-${m.id}`} style={styles.addedItem}>
-        <AppText style={styles.addedText}>
-          {r.charAt(0).toUpperCase() + r.slice(1)}: {m.userName}
-        </AppText>
-      </View>
-    ))
+  return (
+    <>
+      {roles.map((r) => {
+        const users = formValues.composers[r];
+        if (!users || users.length === 0) return null;
+
+        return (
+          <View key={r} style={styles.addedItem}>
+            <AppText style={styles.addedText}>
+              {r.charAt(0).toUpperCase() + r.slice(1)}:{" "}
+              <RenderNamesWithSeparator users={users} separator=" / " />
+            </AppText>
+          </View>
+        );
+      })}
+    </>
   );
 }
+
 const styles = StyleSheet.create({
   addedItem: {
     flexDirection: "row",

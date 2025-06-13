@@ -1,9 +1,16 @@
 import { TextInput, StyleSheet, View } from "react-native";
-import { colors, fontSize, spacing } from "../../styles/globalStyles";
+import {
+  colors,
+  fontSize,
+  height,
+  spacing,
+  width,
+} from "../../styles/globalStyles";
 import AppText from "../ui/AppText";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ComposerListItem from "./ComposerListItem";
 import ComposerDisplay from "./ComposerDisplay";
+import RenderNamesWithSeparator from "../LyricsList/RenderNamesWithSeparator";
 
 type Props = {
   placeHolder?: string;
@@ -21,6 +28,7 @@ export default function LyricsInput({
   return (
     <View style={styles.container}>
       <AppText style={styles.label}>{label}</AppText>
+
       <ComposerDisplay roles={["music", "lyrics"]} />
       <TextInput
         multiline={true}
@@ -47,12 +55,12 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xs,
   },
   textArea: {
-    width: 600,
-    height: 280, // Du kan justera höjden
+    width: width * 0.8,
+    height: height * 0.7,
     backgroundColor: colors.highlight,
     color: colors.text,
     padding: spacing.medium,
     fontSize: fontSize.large,
-    borderRadius: 6, // Rundade hörn för en mjukare känsla
+    borderRadius: 6,
   },
 });

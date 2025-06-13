@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { useLyricsForm } from "../../hooks/useLyricsForm";
 import AppPressable from "../ui/AppPressable";
 import { colors } from "../../styles/globalStyles";
@@ -40,7 +40,6 @@ export default function ComposerListItem({ role }: Props) {
           ))}
         </View>
       )}
-      {/* TODO:Modulera ut denna del och använd role och gör den generisk för music och lyrics */}
     </View>
   );
 }

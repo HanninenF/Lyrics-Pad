@@ -31,7 +31,7 @@ export default function LyricsCard({ lyricsId }: Props) {
       <AppText style={styles.roles}>
         {"Music: "}
         <RenderNamesWithSeparator
-          user={lyric.composers.music}
+          users={lyric.composers.music}
           separator="/"
           style={styles.name}
         />
@@ -39,7 +39,7 @@ export default function LyricsCard({ lyricsId }: Props) {
       <AppText style={styles.roles}>
         {"Lyrics: "}
         <RenderNamesWithSeparator
-          user={lyric.composers.lyrics}
+          users={lyric.composers.lyrics}
           separator="/"
           style={styles.name}
         />
