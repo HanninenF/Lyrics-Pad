@@ -20,7 +20,7 @@ export type FormValues = Omit<LyricType, "id" | "createdAt">;
 
 export type RootStackParamList = {
   Home: undefined;
-  LyricsFormScreen: undefined;
+  LyricsFormScreen: { song?: LyricType };
   Editor: { lyricsId: string };
 };
 

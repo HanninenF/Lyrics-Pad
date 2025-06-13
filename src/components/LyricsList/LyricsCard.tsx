@@ -6,32 +6,31 @@ import AppPressable from "../ui/AppPressable";
 import useLyricsContext from "../../hooks/useLyricsContext";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { MusicianType, RootStackParamList } from "../../types/types";
+import { LyricType, MusicianType, RootStackParamList } from "../../types/types";
 import RenderNamesWithSeparator from "./RenderNamesWithSeparator";
 
 type Props = {
-  lyricsId: string;
+  song: LyricType;
 };
 
-export default function LyricsCard({ lyricsId }: Props) {
-  const { lyrics } = useLyricsContext();
-  type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Editor">;
+export default function LyricsCard({ song }: Props) {
+  type NavigationProp = NativeStackNavigationProp<
+    RootStackParamList,
+    "LyricsFormScreen"
+  >;
   const navigation = useNavigation<NavigationProp>();
-
-  const lyric = lyrics.find((l) => lyricsId === l.id);
-  if (!lyric) throw new Error("no lyric was found");
 
   return (
     <AppPressable
-      key={lyric.id}
+      key={song.id}
       style={styles.container}
-      onPress={() => navigation.navigate("Editor", { lyricsId })}
+      onPress={() => navigation.navigate("LyricsFormScreen", { song })}
     >
-      <AppText style={styles.header}>{lyric.title}</AppText>
+      <AppText style={styles.header}>{song.title}</AppText>
       <AppText style={styles.roles}>
         {"Music: "}
         <RenderNamesWithSeparator
-          users={lyric.composers.music}
+          users={song.composers.music}
           separator="/"
           style={styles.name}
         />
@@ -39,7 +38,7 @@ export default function LyricsCard({ lyricsId }: Props) {
       <AppText style={styles.roles}>
         {"Lyrics: "}
         <RenderNamesWithSeparator
-          users={lyric.composers.lyrics}
+          users={song.composers.lyrics}
           separator="/"
           style={styles.name}
         />

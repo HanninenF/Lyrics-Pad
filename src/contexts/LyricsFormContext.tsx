@@ -15,8 +15,23 @@ export const LyricsFormContext = createContext<LyricsFormContextType | null>(
   null
 );
 
-export const LyricsFormProvider = ({ children }: { children: ReactNode }) => {
-  const [formValues, dispatch] = useReducer(formReducer, initialState);
+type LyricsFormProviderProps = {
+  children: ReactNode;
+  initialSong?: LyricType;
+};
+
+export const LyricsFormProvider = ({
+  children,
+  initialSong,
+}: LyricsFormProviderProps) => {
+  const initialFormState = initialSong
+    ? {
+        ...initialState,
+        ...initialSong,
+        // eventuellt mappa om fälten om de skiljer sig i struktur
+      }
+    : initialState;
+  const [formValues, dispatch] = useReducer(formReducer, initialFormState);
   const { setLyrics, setMusicians } = useLyricsContext();
 
   const handleSetTitle = (text: string) => {
@@ -30,11 +45,6 @@ export const LyricsFormProvider = ({ children }: { children: ReactNode }) => {
   const handleSave = () => {
     const { title, content, composers } = formValues;
 
-    console.log("title", title);
-    console.log("content", content);
-    console.log("music composers length", composers.music.length);
-    console.log("lyrics composers length", composers.lyrics.length);
-
     if (
       !title ||
       !content ||
@@ -47,23 +57,36 @@ export const LyricsFormProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
+    const isEditing = !!initialSong;
+
     const newLyric: LyricType = {
       ...formValues,
-      id: Date.now().toString(),
-      createdAt: Date.now(),
+      id: isEditing ? initialSong!.id : Date.now().toString(),
+      createdAt: isEditing ? initialSong!.createdAt : Date.now(),
     };
 
-    setLyrics((prev) => [...prev, newLyric]);
+    setLyrics((prev) => {
+      if (isEditing) {
+        return prev.map((lyric) =>
+          lyric.id === initialSong!.id ? newLyric : lyric
+        );
+      } else {
+        return [...prev, newLyric];
+      }
+    });
 
     setMusicians((prev) =>
       prev.map((musician) => {
         const isInMusic = composers.music.some((m) => m.id === musician.id);
         const isInLyrics = composers.lyrics.some((l) => l.id === musician.id);
+        const isAlreadyIn = musician.songs.some((s) => s.id === newLyric.id);
 
         if (isInMusic || isInLyrics) {
           return {
             ...musician,
-            songs: [...musician.songs, newLyric],
+            songs: isAlreadyIn
+              ? musician.songs.map((s) => (s.id === newLyric.id ? newLyric : s))
+              : [...musician.songs, newLyric],
           };
         }
 

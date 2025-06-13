@@ -29,7 +29,7 @@ export default function LyricsList() {
         <FlatList
           data={lyrics}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <LyricsCard lyricsId={item.id} />}
+          renderItem={({ item }) => <LyricsCard song={item} />}
         />
       )}
     </>

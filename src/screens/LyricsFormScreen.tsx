@@ -6,13 +6,19 @@ import {
   Platform,
   StatusBar,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types/types";
 import { colors } from "../styles/globalStyles";
 import LyricsForm from "../components/LyricsForm/LyricsForm";
 import AppPressable from "../components/ui/AppPressable";
 import { LyricsFormProvider } from "../contexts/LyricsFormContext";
+import useLyricsContext from "../hooks/useLyricsContext";
+
+type LyricsFormScreenRouteProp = RouteProp<
+  RootStackParamList,
+  "LyricsFormScreen"
+>;
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -20,14 +26,17 @@ type NavigationProp = NativeStackNavigationProp<
 >;
 
 export default function LyricsFormScreen() {
+  const route = useRoute<LyricsFormScreenRouteProp>();
+  const song = route.params?.song;
   const navigation = useNavigation<NavigationProp>();
+
   return (
     <SafeAreaView style={styles.safeArea}>
-      <LyricsFormProvider>
+      <LyricsFormProvider initialSong={song}>
         <LyricsForm />
       </LyricsFormProvider>
 
-      <View style={styles.nabvButtonWrapper}>
+      <View style={styles.navButtonWrapper}>
         {/*  <AppPressable onPress={() => navigation.navigate("Editor")}>
           <Text>Edit</Text>
         </AppPressable> */}
@@ -45,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: colors.background,
   },
-  nabvButtonWrapper: {
+  navButtonWrapper: {
     flexDirection: "row",
   },
 });
