@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xs,
   },
   textArea: {
-    width: width * 0.8,
+    width: width * 1,
     height: height * 0.7,
     backgroundColor: colors.highlight,
     color: colors.text,

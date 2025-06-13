@@ -21,10 +21,12 @@ export default function LyricsForm() {
   return (
     <>
       <KeyboardAwareScrollView contentContainerStyle={styles.scrollView}>
-        <AppPressable onPress={() => setShowMetadata(!showMetadata)}>
-          <AppText>Show song info</AppText>
-        </AppPressable>
         {showMetadata && <SongMetaData />}
+        <AppPressable onPress={() => setShowMetadata(!showMetadata)}>
+          <AppText>
+            {!showMetadata ? "Show song info" : "Hide song info"}
+          </AppText>
+        </AppPressable>
 
         {/* skriv i låtens text */}
         <LyricsInput
