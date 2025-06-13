@@ -14,9 +14,12 @@ import LyricsForm from "../components/LyricsForm/LyricsForm";
 import AppPressable from "../components/ui/AppPressable";
 import { LyricsFormProvider } from "../contexts/LyricsFormContext";
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, "NewLyric">;
+type NavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "LyricForm"
+>;
 
-export default function NewLyricScreen() {
+export default function LyricsFormScreen() {
   const navigation = useNavigation<NavigationProp>();
   return (
     <SafeAreaView style={styles.safeArea}>
