@@ -3,8 +3,10 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   View,
+  StyleProp,
+  TextStyle,
 } from "react-native";
-import { colors, fontSize, spacing } from "../../styles/globalStyles";
+import { colors, fontSize, spacing, width } from "../../styles/globalStyles";
 import AppText from "./AppText";
 
 type Props = {
@@ -12,6 +14,7 @@ type Props = {
   placeHolder?: string;
   label?: string;
   value: string | undefined;
+  style?: StyleProp<TextStyle>;
 };
 
 export default function AppInput({
@@ -19,16 +22,17 @@ export default function AppInput({
   placeHolder,
   label,
   value,
+  style,
 }: Props) {
   return (
     <KeyboardAvoidingView>
-      <View style={styles.container}>
-        <AppText style={styles.label}>{label}</AppText>
+      <View style={inputStyles.container}>
+        {label && <AppText style={inputStyles.label}>{label}</AppText>}
         <TextInput
           value={value}
           placeholderTextColor={colors.placeHolderTextColor}
           placeholder={placeHolder}
-          style={styles.input}
+          style={[inputStyles.input, style]}
           onChangeText={onChangeText}
         />
       </View>
@@ -36,7 +40,7 @@ export default function AppInput({
   );
 }
 
-const styles = StyleSheet.create({
+const inputStyles = StyleSheet.create({
   container: {
     flexDirection: "column",
     justifyContent: "center",
@@ -49,6 +53,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.small,
   },
   input: {
+    textAlign: "center",
     color: colors.text,
     borderWidth: 1,
     borderColor: colors.buttonDark,
@@ -58,7 +63,6 @@ const styles = StyleSheet.create({
     marginBottom: spacing.small,
     backgroundColor: colors.highlight,
     borderRadius: 5,
-    minWidth: 10,
-    maxWidth: 100,
+    width: width * 0.85,
   },
 });

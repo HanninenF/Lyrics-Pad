@@ -5,6 +5,7 @@ import ComposerListItem from "./ComposerListItem";
 import { useState } from "react";
 import { MusicianType } from "../../types/types";
 import { useLyricsForm } from "../../hooks/useLyricsForm";
+import { fontSize } from "../../styles/globalStyles";
 
 export default function SongMetaData() {
   const { formValues, handleSetTitle } = useLyricsForm();
@@ -19,8 +20,8 @@ export default function SongMetaData() {
       <AppInput
         onChangeText={(text) => handleSetTitle(text)}
         placeHolder="Enter title"
-        label="Enter title"
         value={formValues.title}
+        style={styles.title}
       />
       {/* välj musikkompositör */}
 
@@ -46,5 +47,8 @@ const styles = StyleSheet.create({
     zIndex: 1000,
     alignItems: "center",
     padding: 16,
+  },
+  title: {
+    fontSize: fontSize.large,
   },
 });

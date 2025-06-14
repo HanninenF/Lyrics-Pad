@@ -18,6 +18,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import SongMetaData from "./SongMetaData";
 import AppText from "../ui/AppText";
 import { height } from "../../styles/globalStyles";
+import Modal from "react-native-modal";
 
 export default function LyricsForm() {
   const { formValues, handleSetContent, handleSave } = useLyricsForm();
@@ -26,7 +27,7 @@ export default function LyricsForm() {
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: (_, gestureState) => {
-        return Math.abs(gestureState.dy) > 30; // endast om man sveper lite längre
+        return gestureState.dy > 30;
       },
       onPanResponderRelease: (_, gestureState) => {
         if (gestureState.dy > 50) {
@@ -36,7 +37,7 @@ export default function LyricsForm() {
     })
   ).current;
 
-  const handleOutsidePress = () => {
+  const handleCloseModal = () => {
     setShowMetadata(false);
     Keyboard.dismiss();
   };
@@ -49,30 +50,37 @@ export default function LyricsForm() {
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
       >
-        <Pressable
-          onPress={() => setShowMetadata(true)}
+        <View
+          {...panResponder.panHandlers}
           style={styles.swipeZone}
           {...panResponder.panHandlers}
         >
           <Text>Swipe down here to show metadata</Text>
-        </Pressable>
-
-        {showMetadata && (
-          <Pressable
-            style={StyleSheet.absoluteFill}
-            onPress={handleOutsidePress}
-          />
-        )}
+        </View>
 
         <KeyboardAwareScrollView
           contentContainerStyle={styles.scrollView}
           keyboardShouldPersistTaps="handled"
         >
-          {showMetadata && (
-            <View style={styles.metadata}>
-              <SongMetaData />
+          {/* Modal som kommer från toppen */}
+          <Modal
+            isVisible={showMetadata}
+            onBackdropPress={handleCloseModal}
+            onSwipeComplete={handleCloseModal}
+            swipeDirection="up"
+            propagateSwipe
+            style={{ justifyContent: "flex-start", margin: 0 }}
+            swipeThreshold={200}
+          >
+            <View>
+              <ScrollView
+                contentContainerStyle={{ paddingBottom: 100 }}
+                keyboardShouldPersistTaps="handled"
+              >
+                <SongMetaData />
+              </ScrollView>
             </View>
-          )}
+          </Modal>
 
           <LyricsInput
             onChangeText={(text) => handleSetContent(text)}
@@ -86,8 +94,7 @@ export default function LyricsForm() {
         <View>
           <AppPressable
             onPress={() => {
-              handleOutsidePress();
-              Keyboard.dismiss();
+              handleCloseModal();
               handleSave();
             }}
           >
