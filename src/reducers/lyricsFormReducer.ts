@@ -1,14 +1,19 @@
-import { FormAction, FormValues, MusicianType } from "../types/types";
-export const initialState: FormValues = {
+import uuid from "react-native-uuid";
+import { FormAction, LyricType, MusicianType } from "../types/types";
+
+export const initialState: LyricType = {
+  id: uuid.v4().toString(),
   title: "",
   content: "",
   composers: { music: [], lyrics: [] },
+  createdAt: Date.now(), // 👈 lägg till detta
+  tags: [], // valfri, men bra att initiera om du använder det senare
 };
 
 export default function formReducer(
-  state: FormValues,
+  state: LyricType,
   action: FormAction
-): FormValues {
+): LyricType {
   switch (action.type) {
     case "SET_TITLE":
       return { ...state, title: action.payload };

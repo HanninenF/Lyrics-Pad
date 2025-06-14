@@ -1,10 +1,11 @@
 import { createContext, ReactNode, useReducer } from "react";
 import formReducer, { initialState } from "../reducers/lyricsFormReducer";
-import { LyricType, FormAction, FormValues } from "../types/types";
+import { LyricType, FormAction } from "../types/types";
 import useLyricsContext from "../hooks/useLyricsContext";
+import uuid from "react-native-uuid";
 
 type LyricsFormContextType = {
-  formValues: FormValues;
+  formValues: LyricType;
   dispatch: React.Dispatch<FormAction>;
   handleSetTitle: (text: string) => void;
   handleSetContent: (text: string) => void;
@@ -24,15 +25,18 @@ export const LyricsFormProvider = ({
   children,
   initialSong,
 }: LyricsFormProviderProps) => {
-  const initialFormState = initialSong
-    ? {
-        ...initialState,
-        ...initialSong,
-        // eventuellt mappa om fälten om de skiljer sig i struktur
-      }
-    : initialState;
+  const initialFormState: LyricType = initialSong
+    ? { ...initialSong }
+    : {
+        id: uuid.v4(),
+        title: "",
+        content: "",
+        composers: { music: [], lyrics: [] },
+        createdAt: Date.now(),
+      };
+
   const [formValues, dispatch] = useReducer(formReducer, initialFormState);
-  const { setLyrics, setMusicians } = useLyricsContext();
+  const { lyrics, setLyrics, setMusicians } = useLyricsContext();
 
   const handleSetTitle = (text: string) => {
     dispatch({ type: "SET_TITLE", payload: text });
@@ -57,18 +61,20 @@ export const LyricsFormProvider = ({
       return;
     }
 
-    const isEditing = !!initialSong;
+    const isEditing = lyrics.some((lyric) => lyric?.id === formValues.id);
 
     const newLyric: LyricType = {
       ...formValues,
-      id: isEditing ? initialSong!.id : Date.now().toString(),
-      createdAt: isEditing ? initialSong!.createdAt : Date.now(),
     };
 
     setLyrics((prev) => {
+      if (!formValues.id) return prev; // no update if no ID
+
+      const isEditing = prev.some((lyric) => lyric?.id === formValues.id);
+
       if (isEditing) {
         return prev.map((lyric) =>
-          lyric.id === initialSong!.id ? newLyric : lyric
+          lyric?.id === formValues.id ? newLyric : lyric
         );
       } else {
         return [...prev, newLyric];

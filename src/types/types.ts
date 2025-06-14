@@ -16,7 +16,7 @@ export type MusicianType = {
   songs: LyricType[];
 };
 
-export type FormValues = Omit<LyricType, "id" | "createdAt">;
+// Så att FormValues innehåller id + createdAt
 
 export type RootStackParamList = {
   Home: undefined;
