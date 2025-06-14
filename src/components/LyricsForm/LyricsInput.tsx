@@ -1,4 +1,10 @@
-import { TextInput, StyleSheet, View } from "react-native";
+import {
+  TextInput,
+  StyleSheet,
+  View,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+} from "react-native";
 import {
   colors,
   fontSize,
@@ -17,6 +23,9 @@ type Props = {
   label?: string;
   value: string;
   onChangeText: (text: string) => void;
+  setShowMetadata:
+    | ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
+    | undefined;
 };
 
 export default function LyricsInput({
@@ -24,6 +33,7 @@ export default function LyricsInput({
   label,
   value,
   onChangeText,
+  setShowMetadata,
 }: Props) {
   return (
     <View style={styles.container}>
@@ -38,6 +48,7 @@ export default function LyricsInput({
         value={value}
         onChangeText={onChangeText}
         textAlignVertical="top"
+        onFocus={setShowMetadata}
       />
     </View>
   );
