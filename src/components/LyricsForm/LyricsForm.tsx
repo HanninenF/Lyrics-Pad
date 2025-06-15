@@ -69,7 +69,7 @@ export default function LyricsForm() {
             onSwipeComplete={handleCloseModal}
             swipeDirection="up"
             propagateSwipe
-            style={{ justifyContent: "flex-start", margin: 0 }}
+            style={{ justifyContent: "flex-start", marginTop: height * 0.15 }}
             swipeThreshold={200}
           >
             <View>

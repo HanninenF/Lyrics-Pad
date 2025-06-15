@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { useLyricsForm } from "../../hooks/useLyricsForm";
 import AppPressable from "../ui/AppPressable";
-import { colors } from "../../styles/globalStyles";
+import { colors, spacing, width } from "../../styles/globalStyles";
 import AppText from "../ui/AppText";
 import { Role } from "../../types/types";
 
@@ -31,12 +31,15 @@ export default function ComposerListItem({ role }: Props) {
         <View style={styles.addedList}>
           <Text style={styles.addedText}>Added {role} composers:</Text>
           {formValues.composers[role].map((m) => (
-            <View key={m.id} style={styles.addedItem}>
+            <AppPressable
+              style={styles.removeButton}
+              onPress={() => handleRemoveComposer(m.id)}
+              key={m.id}
+            >
               <Text style={styles.addedText}>{m.userName}</Text>
-              <AppPressable onPress={() => handleRemoveComposer(m.id)}>
-                <Text style={styles.removeText}>Remove</Text>
-              </AppPressable>
-            </View>
+
+              <Text style={styles.removeText}>X</Text>
+            </AppPressable>
           ))}
         </View>
       )}
@@ -51,14 +54,23 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingLeft: 10,
   },
-  addedItem: {
+
+  addedText: { color: colors.text, paddingHorizontal: spacing.xs },
+  removeButton: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
     paddingVertical: 5,
+    paddingHorizontal: 0,
+    backgroundColor: "transparent",
   },
-  addedText: { color: colors.text },
   removeText: {
+    backgroundColor: colors.primary,
+    borderRadius: spacing.xs,
+    alignItems: "flex-start",
+    paddingHorizontal: spacing.xs,
+    fontSize: spacing.large,
+    fontWeight: "bold",
     color: "red",
   },
 });
