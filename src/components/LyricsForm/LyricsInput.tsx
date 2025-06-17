@@ -17,6 +17,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import ComposerListItem from "./ComposerListItem";
 import ComposerDisplay from "./ComposerDisplay";
 import RenderNamesWithSeparator from "../LyricsList/RenderNamesWithSeparator";
+import AppInput from "../ui/AppInput";
+import { useLyricsForm } from "../../hooks/useLyricsForm";
 
 type Props = {
   placeHolder?: string;
@@ -35,9 +37,14 @@ export default function LyricsInput({
   onChangeText,
   setShowMetadata,
 }: Props) {
+  const { handleSetTitle } = useLyricsForm();
   return (
     <View style={styles.container}>
-      <AppText style={styles.label}>{label}</AppText>
+      <AppInput
+        style={styles.label}
+        value={label}
+        onChangeText={handleSetTitle}
+      />
 
       <ComposerDisplay roles={["music", "lyrics"]} />
       <TextInput
@@ -56,16 +63,24 @@ export default function LyricsInput({
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: colors.highlight,
     zIndex: 2,
     marginVertical: spacing.small,
     alignItems: "flex-start",
   },
   label: {
+    marginLeft: spacing.small,
+    textAlign: "left",
+    borderWidth: 0,
+    borderColor: "inherit",
+    width: width * 0.97,
     color: colors.text,
-    fontSize: fontSize.medium,
-    marginBottom: spacing.xs,
+    fontSize: fontSize.Xxl,
+    fontFamily: "stigmaPoster",
+    letterSpacing: 1.5,
   },
   textArea: {
+    marginTop: spacing.small,
     width: width * 1,
     height: height * 0.7,
     backgroundColor: colors.highlight,

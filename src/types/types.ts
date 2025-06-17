@@ -19,7 +19,7 @@ export type MusicianType = {
 // Så att FormValues innehåller id + createdAt
 
 export type RootStackParamList = {
-  Home: undefined;
+  Home: undefined | { song?: LyricType };
   LyricsFormScreen: { song?: LyricType };
   Editor: { lyricsId: string };
 };

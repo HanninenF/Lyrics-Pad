@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import { useLyricsForm } from "../../hooks/useLyricsForm";
 import AppText from "../ui/AppText";
-import { colors } from "../../styles/globalStyles";
+import { colors, spacing } from "../../styles/globalStyles";
 import RenderNamesWithSeparator from "../LyricsList/RenderNamesWithSeparator";
 
 type Props = {
@@ -32,13 +32,12 @@ export default function ComposerDisplay({ roles }: Props) {
 
 const styles = StyleSheet.create({
   addedItem: {
+    marginLeft: spacing.small,
+    padding: spacing.small,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 5,
   },
-  addedText: { color: colors.text },
-  removeText: {
-    color: "red",
-  },
+  addedText: { color: colors.text, fontStyle: "italic" },
 });

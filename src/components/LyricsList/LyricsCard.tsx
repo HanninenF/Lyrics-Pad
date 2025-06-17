@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import AppText from "../ui/AppText";
-import { colors, fontSize, spacing } from "../../styles/globalStyles";
+import { colors, fontSize, spacing, width } from "../../styles/globalStyles";
 import { useFonts } from "expo-font";
 import AppPressable from "../ui/AppPressable";
 import useLyricsContext from "../../hooks/useLyricsContext";
@@ -23,7 +23,7 @@ export default function LyricsCard({ song }: Props) {
   return (
     <AppPressable
       key={song.id}
-      style={styles.container}
+      style={[styles.container, styles.cardEdge]}
       onPress={() => navigation.navigate("LyricsFormScreen", { song })}
     >
       <AppText style={styles.header}>{song.title}</AppText>
@@ -48,20 +48,30 @@ export default function LyricsCard({ song }: Props) {
 }
 const styles = StyleSheet.create({
   container: {
-    margin: 0,
+    margin: spacing.xs,
     alignItems: "flex-start",
-    width: 300,
+    width: width * 0.77,
     backgroundColor: colors.highlight,
-    borderWidth: 1,
-    borderColor: "white",
-    borderRadius: spacing.xs,
-    paddingVertical: spacing.small,
+    borderWidth: 2,
+    borderColor: colors.placeHolderTextColor,
+    borderRadius: 0,
+    borderTopRightRadius: spacing.xs,
+
+    borderBottomRightRadius: spacing.xs,
+    paddingVertical: spacing.medium,
     paddingHorizontal: spacing.medium,
+  },
+  cardEdge: {
+    borderLeftWidth: 12,
+    borderTopLeftRadius: spacing.xs,
+    borderBottomLeftRadius: spacing.xs,
+    borderLeftColor: "#353636",
   },
   header: {
     fontFamily: "swomun",
     fontSize: fontSize.large,
     letterSpacing: 1.1,
+    marginBottom: 10,
   },
   roles: {
     paddingLeft: spacing.large,

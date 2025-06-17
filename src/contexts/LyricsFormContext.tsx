@@ -77,7 +77,7 @@ export const LyricsFormProvider = ({
           lyric?.id === formValues.id ? newLyric : lyric
         );
       } else {
-        return [...prev, newLyric];
+        return [newLyric, ...prev];
       }
     });
 

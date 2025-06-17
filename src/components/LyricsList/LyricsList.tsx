@@ -17,7 +17,7 @@ import { FlatList } from "react-native-gesture-handler";
 
 export default function LyricsList() {
   const { lyrics } = useLyricsContext();
-  const [showLyricsCards, setShowLyricsCards] = useState(false);
+  const [showLyricsCards, setShowLyricsCards] = useState(true);
 
   return (
     <>

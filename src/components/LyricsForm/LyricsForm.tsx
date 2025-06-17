@@ -19,10 +19,12 @@ import SongMetaData from "./SongMetaData";
 import AppText from "../ui/AppText";
 import { height } from "../../styles/globalStyles";
 import Modal from "react-native-modal";
+import DragHandleIcon from "../icons/DragHandle";
 
 export default function LyricsForm() {
   const { formValues, handleSetContent, handleSave } = useLyricsForm();
   const [showMetadata, setShowMetadata] = useState(false);
+  const [modalReady, setModalReady] = useState(false);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -37,8 +39,12 @@ export default function LyricsForm() {
     })
   ).current;
 
+  const handleOpenModal = () => {
+    setShowMetadata(true);
+  };
   const handleCloseModal = () => {
     setShowMetadata(false);
+    setModalReady(false);
     Keyboard.dismiss();
   };
 
@@ -50,36 +56,38 @@ export default function LyricsForm() {
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
       >
-        <View
-          {...panResponder.panHandlers}
-          style={styles.swipeZone}
-          {...panResponder.panHandlers}
-        >
-          <Text>Swipe down here to show metadata</Text>
+        <View {...panResponder.panHandlers} style={styles.swipeZone}>
+          <DragHandleIcon fill="white" height={48} width={48} />
         </View>
 
-        <KeyboardAwareScrollView
+        <ScrollView
           contentContainerStyle={styles.scrollView}
           keyboardShouldPersistTaps="handled"
         >
           {/* Modal som kommer från toppen */}
           <Modal
             isVisible={showMetadata}
+            onModalShow={() => setModalReady(true)}
+            onModalHide={() => setModalReady(false)}
             onBackdropPress={handleCloseModal}
             onSwipeComplete={handleCloseModal}
             swipeDirection="up"
+            animationIn={"slideInDown"}
+            animationOut={"slideOutUp"}
             propagateSwipe
             style={{ justifyContent: "flex-start", marginTop: height * 0.15 }}
             swipeThreshold={200}
           >
-            <View>
-              <ScrollView
-                contentContainerStyle={{ paddingBottom: 100 }}
-                keyboardShouldPersistTaps="handled"
-              >
-                <SongMetaData />
-              </ScrollView>
-            </View>
+            {modalReady && (
+              <View>
+                <ScrollView
+                  contentContainerStyle={{ paddingBottom: 100 }}
+                  keyboardShouldPersistTaps="handled"
+                >
+                  <SongMetaData />
+                </ScrollView>
+              </View>
+            )}
           </Modal>
 
           <LyricsInput
@@ -89,7 +97,7 @@ export default function LyricsForm() {
             label={formValues.title}
             setShowMetadata={() => setShowMetadata(false)}
           />
-        </KeyboardAwareScrollView>
+        </ScrollView>
 
         <View>
           <AppPressable
@@ -111,7 +119,7 @@ const styles = StyleSheet.create({
   },
   swipeZone: {
     height: height * 0.05,
-    backgroundColor: "#ddd",
+    backgroundColor: "transparent",
     justifyContent: "center",
     alignItems: "center",
   },
