@@ -16,7 +16,23 @@ export type MusicianType = {
   songs: LyricType[];
 };
 
-// Så att FormValues innehåller id + createdAt
+export type SanitizedLyricType = {
+  id: string;
+  title: string;
+  composers: {
+    music: SanitizedMusicianType[];
+    lyrics: SanitizedMusicianType[];
+  };
+  content: string;
+  createdAt: number;
+  tags?: string[];
+};
+
+export type SanitizedMusicianType = {
+  id: string;
+  userName: string;
+  // songs tas bort för att undvika cirkulära referenser
+};
 
 export type RootStackParamList = {
   Home: undefined | { song?: LyricType };

@@ -3,6 +3,7 @@ import formReducer, { initialState } from "../reducers/lyricsFormReducer";
 import { LyricType, FormAction } from "../types/types";
 import useLyricsContext from "../hooks/useLyricsContext";
 import uuid from "react-native-uuid";
+import { saveLyrics } from "./saveLyrics";
 
 type LyricsFormContextType = {
   formValues: LyricType;
@@ -67,19 +68,21 @@ export const LyricsFormProvider = ({
       ...formValues,
     };
 
-    setLyrics((prev) => {
-      if (!formValues.id) return prev; // no update if no ID
-
-      const isEditing = prev.some((lyric) => lyric?.id === formValues.id);
+    const updatedLyrics = (() => {
+      if (!formValues.id) return lyrics;
 
       if (isEditing) {
-        return prev.map((lyric) =>
+        return lyrics.map((lyric) =>
           lyric?.id === formValues.id ? newLyric : lyric
         );
       } else {
-        return [newLyric, ...prev];
+        return [newLyric, ...lyrics];
       }
-    });
+    })();
+    setLyrics(updatedLyrics);
+
+    // 🔐 Spara till AsyncStorage
+    saveLyrics(updatedLyrics);
 
     setMusicians((prev) =>
       prev.map((musician) => {
